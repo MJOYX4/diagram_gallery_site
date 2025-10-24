@@ -1,0 +1,16 @@
+
+# Byte-compiled / cache
+__pycache__/
+*.py[cod]
+*.ipynb_checkpoints
+
+# Virtual environments
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# If you want to commit generated plots, comment these lines out
+# static/plots/*

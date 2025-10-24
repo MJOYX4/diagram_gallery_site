@@ -1,0 +1,98 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Diagram Gallery</title>
+  <style>
+    :root {
+      --max-width: 1080px;
+      --gap: 16px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+      background: #0b0c10;
+      color: #e6edf3;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      width: 100%;
+      max-width: var(--max-width);
+      padding: 24px 16px 48px;
+    }
+    header h1 {
+      margin: 0 0 4px 0;
+      font-size: 28px;
+      letter-spacing: .3px;
+    }
+    header p {
+      margin: 0 0 20px 0;
+      color: #9fb3c8;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--gap);
+    }
+    .card {
+      background: #11141a;
+      border: 1px solid #1e2632;
+      border-radius: 16px;
+      padding: 12px;
+      box-shadow: 0 6px 20px rgba(0,0,0,.3);
+    }
+    .card img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      display: block;
+    }
+    .caption {
+      font-size: 14px;
+      color: #a6b5c5;
+      margin-top: 8px;
+      word-break: break-word;
+    }
+    /* 2-column on medium+, 3 on wide screens (optional) */
+    @media (min-width: 700px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (min-width: 1200px) {
+      .grid { grid-template-columns: 1fr 1fr; } /* keep it 2-col as requested */
+    }
+    footer {
+      margin-top: 28px;
+      color: #8193a6;
+      font-size: 13px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Diagram Gallery</h1>
+      <p>All plots generated from CSV / notebook.</p>
+    </header>
+
+    <main class="grid">
+      {% for img in image_files %}
+      <article class="card">
+        <img src="{{ url_for('static', filename=img) }}" alt="{{ img }}">
+        <div class="caption">{{ img.split("/")[-1] }}</div>
+      </article>
+      {% else %}
+      <p>No images yet. Add PNGs to <code>static/plots/</code> and reload.</p>
+      {% endfor %}
+    </main>
+
+    <footer>
+      Served by Flask on PythonAnywhere. Two-column layout on desktop, single column on mobile.
+    </footer>
+  </div>
+</body>
+</html>
